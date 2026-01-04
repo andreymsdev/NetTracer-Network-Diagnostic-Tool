@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive layout on mobile -->
+    <link rel="stylesheet" href="style.css">
+    <title>NetTracer</title>
+</head>
+
+<body>
+    <!-- Background video -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="images/grade.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Top text section -->
+    <section class="top-txt">
+        <div class="head container">
+            <div class="head-txt">
+                <!-- Description -->
+                <p>Analyze your internet connection</p>
+            </div>
+        </div> 
+    </section>  
+
+    <!-- Center -->
+    <section class="center-txt">
+        <div class="center-container">
+            
+            <!-- Title -->
+            <h1 class="main-logo">NET TRACER</h1>
+            <p class="tagline">SYSTEM DIAGNOSTIC AI</p>
+            
+            <!-- wrapper button -->
+            <div class="action-wrapper" style="margin-top: 60px; display: flex; justify-content: center;">
+                
+                <!-- scan button -->
+                <div id="liquid-metal" onclick="startHack()">
+                    <div class="outline">
+                        
+                        <!-- Button text -->
+                        <p class="btn-internal-text">WIFI SCAN</p>
+                
+                        <img src="" id="btn-loader" style="display: none; width: 50px; height: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </section>
+    <!-- javascript -->
+    <script src="script.js"></script>
+<!-- social -->
+<footer class="footer-social">
+
+        <div class="social-wrapper">
+            <a href="https://github.com/andreymsdev" target="_blank" class="social-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="social-icon">
+            </a>
+
+            <div class="social-divider"></div>
+
+            <a href="https://www.linkedin.com/in/andrey-ms" target="_blank" class="social-link">
+                <img src="https://cdn-icons-png.flaticon.com/512/1384/1384014.png" alt="LinkedIn" class="social-icon">            
+            </a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
