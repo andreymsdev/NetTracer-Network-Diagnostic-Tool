@@ -23,8 +23,12 @@ app.post('/analisar', async (req, res) => {
         const os = userAgent.includes('Windows') ? 'Windows Terminal' : 
                    userAgent.includes('Mac') ? 'MacOS Kernel' : 'Linux/Mobile Interface';
 
-        // Fetch public IP geolocation data
-        const geoResponse = await axios.get('http://ip-api.com/json/');
+        // Get the real client IP from Vercel's headers
+        // This ensures we track the user, not the server
+        const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+        // Fetch geolocation data for the specific client IP
+        const geoResponse = await axios.get(`http://ip-api.com/json/${clientIp}`);
         const geo = geoResponse.data;
 
         // Determine signal quality based on latency
@@ -33,12 +37,12 @@ app.post('/analisar', async (req, res) => {
         // Generate timestamp in 24h format
         const timestamp = new Date().toLocaleString('en-US', { hour12: false });
 
-        // Build terminal-style analysis report
+        // Build terminal-style analysis report using the user's real data
         const report = `[ANALYSIS COMPLETE - ${timestamp}]
 ---------------------------------------------------------------------------
 > CONNECTION_DATA            > NETWORK_IDENTITY           > SECURITY_STATUS
-SIGNAL: ${signalBar.split(' ')[0]}      CITY: ${geo.city}          ENCRYPTION: AES-256
-LATENCY: ${ping}ms               ISP: ${geo.isp.substring(0,12)}...     STATUS: ${speed > 10 ? 'STABLE' : 'VULN'}
+SIGNAL: ${signalBar.split(' ')[0]}      CITY: ${geo.city}           ENCRYPTION: AES-256
+LATENCY: ${ping}ms               ISP: ${geo.isp ? geo.isp.substring(0,12) : 'Unknown'}...      STATUS: ${speed > 10 ? 'STABLE' : 'VULN'}
 OS_INT: Mobile/LX            IP: ${geo.query}          THREAT: ${speed > 10 ? 'LOW' : 'HIGH'}
 ---------------------------------------------------------------------------`;
 
@@ -60,7 +64,7 @@ const PORT = process.env.PORT || 3000;
 
 // Vercel (local testing)
 if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => console.log(`🚀 Local Server active on port ${PORT}`));
+    app.listen(PORT, () => console.log(` Local Server active on port ${PORT}`));
 }
 
 module.exports = app;
