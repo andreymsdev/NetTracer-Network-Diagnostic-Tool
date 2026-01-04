@@ -1,5 +1,6 @@
 // Backend endpoint used to send network data 
-const SERVER_URL = "http://localhost:3000/analisar";
+// Ajustado para funcionar tanto localmente quanto na Vercel
+const SERVER_URL = "/analisar";
 
 // --- WIFI SCAN BUTTON ---
 async function startHack() {
