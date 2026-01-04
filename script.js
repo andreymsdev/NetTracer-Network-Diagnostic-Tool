@@ -1,5 +1,4 @@
 // Backend endpoint used to send network data 
-// Ajustado para funcionar tanto localmente quanto na Vercel
 const SERVER_URL = "/analisar";
 
 // --- WIFI SCAN BUTTON ---
